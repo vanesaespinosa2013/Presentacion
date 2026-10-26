@@ -209,7 +209,7 @@ S.push({h:`<h1 class="ttl"><span>JUGADORA </span></h1>
 <div class="cards3">
 <button type="button" aria-label="Ver información del personaje: quién soy"><i>🧩</i><small>QUIÉN SOY</small><b>Curiosa y creativa</b></button>
 <button type="button" aria-label="Ver información del personaje: qué me gusta"><i>🎧</i><small>QUÉ ME GUSTA</small><b>Juegos · música · deporte</b></button>
-<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Crear soluciones que le sirvan a los demás.</b></button></div>
+<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Crear soluciones que generen valor.</b></button></div>
 <p class="c"><button class="btn blink" id="go">▶ PRESS START</button></p>`,
 init(e){$("#go",e).onclick=()=>show(1);$$(".cards3 button",e).forEach(card=>card.onclick=openFicha);
 $("#hero",e).onclick=ev=>{anim($("#hero",e),"jump");beep(520,.1)}}});
