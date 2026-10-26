@@ -191,7 +191,7 @@ m.innerHTML=`<div class="fc"><button class="fcx" id="fcx" aria-label="Cerrar">�
 <div class="fcg">
 <div class="fv"><i>🧩</i><small>QUIÉN SOY</small><p>Curiosa y creativa. Pasé de los medios audiovisuales al desarrollo de software; hoy estudio Ingeniería de Sistemas.</p></div>
 <div class="fm"><i>🎧</i><small>QUÉ ME GUSTA</small><div class="chips"><span>🎵 Música</span><span>📺 Series</span><span>🎮 Juegos</span><span>⚽ Deportes</span><span>🧶 Crochet</span></div></div>
-<div class="fy"><i>🔥</i><small>QUÉ ME MOTIVA</small><p>Aprender cosas nuevas y crear soluciones que le sirvan a alguien.</p></div>
+<div class="fy"><i>🔥</i><small>QUÉ ME MOTIVA</small><p>Aprender cosas nuevas y crear soluciones que generen valor para los demás.</p></div>
 </div>
 <p class="fcactions"><button class="btn alt fcb" id="fcno">CERRAR</button></p></div>`;
 document.body.appendChild(m);beep(660,.1);
@@ -209,7 +209,7 @@ S.push({h:`<h1 class="ttl"><span>JUGADORA </span></h1>
 <div class="cards3">
 <button type="button" aria-label="Ver información del personaje: quién soy"><i>🧩</i><small>QUIÉN SOY</small><b>Curiosa y creativa</b></button>
 <button type="button" aria-label="Ver información del personaje: qué me gusta"><i>🎧</i><small>QUÉ ME GUSTA</small><b>Juegos · música · deporte</b></button>
-<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Que sirva a alguien</b></button></div>
+<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Crear soluciones que le sirvan a los demás.</b></button></div>
 <p class="c"><button class="btn blink" id="go">▶ PRESS START</button></p>`,
 init(e){$("#go",e).onclick=()=>show(1);$$(".cards3 button",e).forEach(card=>card.onclick=openFicha);
 $("#hero",e).onclick=ev=>{anim($("#hero",e),"jump");beep(520,.1)}}});
