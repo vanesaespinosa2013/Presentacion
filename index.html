@@ -19,6 +19,7 @@ background-image:linear-gradient(var(--ink2) 1px,transparent 1px),linear-gradien
 #bar{flex:1;height:10px;background:var(--ink2);border:2px solid var(--paper)}
 #fill{height:100%;width:0;background:var(--yellow);transition:width .4s steps(8)}
 #mute{font-size:14px;background:none;border:0;cursor:pointer;color:var(--yellow)}
+#profile-print{font-size:16px;background:none;border:0;cursor:pointer;color:var(--yellow);line-height:1}
 main{flex:1;overflow-y:auto;padding:8px 16px 16px;-webkit-overflow-scrolling:touch}
 .screen{display:none}.screen.on{display:block;animation:in .35s steps(7) both}
 @keyframes in{from{opacity:0;transform:translateX(var(--d,30px))}}
@@ -137,17 +138,113 @@ button:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
 .chips span{display:flex;align-items:center;justify-content:center;min-height:34px;font-size:clamp(9px,2.3vw,12px);font-weight:800;line-height:1.3;background:#34344a;border:1px solid #55556d;padding:5px 4px}
 .btn.alt.fcb{background:#2a2a5c;color:var(--paper);border-color:#4a4a8a}
 .fcactions{text-align:center;margin:14px 0 0}
+#profile-view[hidden]{display:none}
+.profile-view{max-width:760px;height:100%;overflow-y:auto;margin:0 auto;padding:28px 24px 40px;background:var(--paper);color:var(--ink);line-height:1.55}
+.profile-view h1,.profile-view h2{font-family:var(--px);color:#262652}
+.profile-view h1{font-size:clamp(18px,4vw,28px);margin-bottom:4px}
+.profile-view h2{font-size:14px;margin:22px 0 8px;padding-bottom:5px;border-bottom:2px solid #9a6bff}
+.profile-view p,.profile-view li{margin-bottom:7px}
+.profile-view ul{padding-left:22px}
+.profile-intro{font-weight:800;color:#45456b}
+.profile-card{padding:12px 14px;margin:10px 0;border-left:4px solid #9a6bff;background:#fff}
+.profile-card h3{font-size:16px;margin-bottom:4px}
+.profile-actions{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.profile-actions .btn{font-family:var(--body);font-size:14px;letter-spacing:0}
+#app[hidden]{display:none}
+@media print{
+ @page{margin:16mm}
+ html,body{height:auto;overflow:visible;background:#fff!important;color:#111!important;font:11pt/1.4 Arial,sans-serif}
+ body.printing-profile>*:not(#profile-view){display:none!important}
+ #profile-view,#profile-view[hidden]{display:block!important;width:auto;height:auto;max-width:none;overflow:visible;margin:0;padding:0;background:#fff;color:#111}
+ .profile-view h1,.profile-view h2{font-family:Arial,sans-serif;color:#111}
+ .profile-view h1{font-size:22pt}
+ .profile-view h2{font-size:14pt;border-color:#555;break-after:avoid}
+ .profile-view p,.profile-view li{font-size:10.5pt}
+ .profile-card{break-inside:avoid;border-left-color:#555;background:#fff;padding:6px 10px;margin:6px 0}
+ .profile-actions{display:none!important}
+}
+
+/* bitácora */
+#book-btn{font-size:16px;background:none;border:0;cursor:pointer;color:var(--yellow);line-height:1}
+#bkm{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,10,28,.88);animation:mdin .3s steps(4)}
+.bk{position:relative;width:100%;max-width:640px;max-height:90vh;overflow:auto;text-align:left;background:#17172f;border:3px solid var(--paper);box-shadow:8px 8px 0 var(--violet);padding:20px 16px 16px;animation:mpop .45s cubic-bezier(.3,1.6,.5,1)}
+.bk>h2:not(.fctag){margin:0 0 6px}
+.bk .tiny{font-size:11px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+.bk .tiny a{color:var(--yellow);font-weight:800}
+.book-sec{margin-bottom:16px;border-top:2px dashed #3a3a72;padding-top:10px}
+.book-sec:first-of-type{border-top:0;padding-top:0}
+.book-sec>h3{font:9px/1.6 var(--px);color:var(--mint);margin:0 0 8px;letter-spacing:1px}
+.book-item{display:flex;gap:9px;align-items:flex-start;background:#0d0d1e;border:2px solid #3a3a72;padding:9px 10px;margin-bottom:7px}
+.book-item.got{border-color:rgba(94,224,160,.55)}
+.book-item .bi-ico{font-size:18px;line-height:1.3;flex:0 0 auto}
+.book-item .bi-txt{min-width:0;flex:1}
+.book-item b.bi-title{display:block;font-size:13px;color:var(--paper);margin-bottom:4px}
+.book-item .bi-tag{display:block;font:6px/1.6 var(--px);color:var(--muted);letter-spacing:.5px;margin-bottom:4px}
+.book-item .bi-body p{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 6px}
+.book-item .bi-body p:last-child{margin-bottom:0}
+.book-item .bi-body .small{font-size:11px}
+.book-item.got .bi-body p{color:var(--paper)}
+.book-item .bi-body b{color:var(--paper)}
+.book-item .bi-check{font-size:12px;color:var(--mint);flex:0 0 auto}
+.bkfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:2px solid #3a3a72;padding-top:12px;margin-top:6px}
+.bkfoot .tiny{margin:0}
+@media (max-width:480px){.bkfoot{flex-direction:column;align-items:stretch;text-align:center}}
+
+/* perfil impreso = mismo formato que la bitácora */
+.profile-view .book-sec{border-top:2px dashed #b9b0e6;margin-bottom:12px}
+.profile-view .book-sec>h3{color:#262652;font-size:10px;margin:0 0 8px}
+.profile-view .book-item{background:#fff;border:1px solid #cfc8ee;border-left:4px solid #9a6bff;margin-bottom:8px}
+.profile-view .book-item .bi-tag{color:#6a6a8e}
+.profile-view .book-item b.bi-title{color:#262652;font-size:14px}
+.profile-view .book-item .bi-body p,.profile-view .book-item .bi-body b{color:#1b1b3a;font-size:13px}
+.profile-contact{margin-top:18px;padding-top:10px;border-top:2px solid #cfc8ee;font-size:13px;text-align:center}
+.profile-contact a{color:#262652;font-weight:800}
+@media print{
+ #tr,#md,#bkm,#fcm,#ground,.toast,.pt,.nav,#hud,#dots{display:none!important}
+ .profile-view .book-sec{border-top:1px dashed #888;margin-bottom:8px}
+ .profile-view .book-sec>h3{font-family:Arial,sans-serif;font-size:11pt;color:#111;break-after:avoid}
+ .profile-view .book-item{break-inside:avoid;border:1px solid #bbb;border-left:3px solid #555;padding:5px 8px;margin:4px 0;background:#fff}
+ .profile-view .book-item .bi-tag{font:7pt Arial,sans-serif;color:#555}
+ .profile-view .book-item b.bi-title{font-size:10.5pt;color:#111}
+ .profile-view .book-item .bi-body p,.profile-view .book-item .bi-body b{font-size:9.5pt;color:#111;margin-bottom:3px}
+ .profile-contact{font-size:10pt;color:#111;border-color:#555}
+ .profile-contact a{color:#111}
+}
 
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="hud"><span id="lvl">LV 0</span><div id="bar"><div id="fill"></div></div><span id="cc">🪙0/21</span><span id="xp">0 XP</span><button id="mute" aria-label="Sonido">🔊</button></div>
+  <div id="hud"><span id="lvl">LV 0</span><div id="bar"><div id="fill"></div></div><span id="cc">🪙0/21</span><span id="xp">0 XP</span><button id="mute" aria-label="Sonido">🔊</button><button id="book-btn" type="button" aria-label="Abrir bitácora" title="Bitácora">📖</button><button id="profile-print" type="button" aria-label="Abrir perfil para imprimir" title="Imprimir perfil">🖨️</button></div>
   <main id="stage"></main>
   <div id="dots"></div>
   <div id="ground"><span id="back"></span><span id="door">🚪</span><div id="pl"></div></div>
   <div class="nav"><button id="prev" aria-label="Caminar a la izquierda">◀</button><button id="jump" aria-label="Saltar">▲</button><button id="next" aria-label="Caminar a la derecha">▶</button></div>
 </div>
+<section id="profile-view" class="profile-view" hidden aria-labelledby="profile-title">
+  <h1 id="profile-title">Vanessa Espinosa</h1>
+  <p class="profile-intro">Estudiante de Ingeniería de Sistemas · ITM · 8.º semestre</p>
+  <p>Perfil profesional · Software, datos y nube</p>
+
+  <h2>Perfil</h2>
+  <p>Soy Tecnóloga en Desarrollo de Software y estudiante de Ingeniería de Sistemas. Me caracterizo por el aprendizaje autónomo, la creatividad, el trabajo en equipo y el interés por construir soluciones útiles.</p>
+
+  <h2>Formación</h2>
+  <ul>
+    <li>Ingeniería de Sistemas, ITM — en curso, 8.º semestre.</li>
+    <li>Tecnóloga en Desarrollo de Software, ITM (2025).</li>
+    <li>Media técnica en Medios Audiovisuales, en convenio colegio–ITM (2022).</li>
+  </ul>
+
+  <h2>Mi recorrido</h2>
+  <div id="profile-book"></div>
+  <p class="profile-contact" id="profile-contact"></p>
+
+  <div class="profile-actions">
+    <button type="button" class="btn" id="print-profile">Imprimir / Guardar como PDF</button>
+    <button type="button" class="btn alt" id="close-profile">Volver al juego</button>
+  </div>
+</section>
 <script>
 const DATO_EXTRA_EN_MONEDAS=false; // pon false para que las monedas solo sumen al contador y a los XP
 /* ====== EDITA AQUÍ lo personal (no está en tu hoja de vida) ====== */
@@ -184,7 +281,7 @@ function gain(n){xp+=n;$("#xp").textContent=xp+" XP";toast("+"+n+" XP")}
 function anim(el,c){el.classList.remove(c);void el.offsetWidth;el.classList.add(c)}
 
 /* ficha de personaje */
-function openFicha(){if($("#fcm"))return;const m=document.createElement("div");m.id="fcm";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.setAttribute("aria-labelledby","fctitle");
+function openFicha(){if($("#fcm"))return;markCard("ficha0","ficha1","ficha2");const m=document.createElement("div");m.id="fcm";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.setAttribute("aria-labelledby","fctitle");
 m.innerHTML=`<div class="fc"><button class="fcx" id="fcx" aria-label="Cerrar">✕</button>
 <h2 class="fctag" id="fctitle">INFORMACIÓN DEL PERSONAJE</h2>
 <div class="fcprofile"><div class="fcav">${HERO}</div><div><h3 class="fcname">${YO.nombre}</h3><p class="fcdegree">Ingeniería de Sistemas · ITM · 8.º semestre</p></div></div>
@@ -199,6 +296,73 @@ const close=()=>{m.remove();document.removeEventListener("keydown",esc)},esc=ev=
 document.addEventListener("keydown",esc);
 $("#fcx",m).onclick=close;$("#fcno",m).onclick=close;m.addEventListener("pointerdown",ev=>{if(ev.target===m)close()});
 $("#fcx",m).focus()}
+/* ===== Bitácora: todo sale de lo que ya está en el juego ===== */
+const P=t=>t.map(x=>`<p>${x}</p>`).join("");
+const BOOK_SECS=[
+{ico:"🧩",name:"Portada · Ficha del personaje",items:[
+ ["ficha0","🧩","QUIÉN SOY","Curiosa y creativa",P(["Pasé de los medios audiovisuales al desarrollo de software; hoy estudio Ingeniería de Sistemas."])],
+ ["ficha1","🎧","QUÉ ME GUSTA","Música, series, juegos, deportes y crochet",P(["🎵 Música · 📺 Series · 🎮 Juegos · ⚽ Deportes · 🧶 Crochet"])],
+ ["ficha2","🔥","QUÉ ME MOTIVA","Crear solucionenes que generen valor",P(["Aprender cosas nuevas y crear soluciones que generen valor para los demás."])]]},
+{ico:"🎬",name:"Nivel 1 · Datos personales · Mi historia",items:[
+ ["eta1","🧒","0 A 10 AÑOS","Familia, deporte y colegio",P(["Crecí con mis padres y mis hermanos, en una familia muy unida.","Mi mamá me inscribió en el <b>INDER</b>: practiqué varios deportes, competí y gané algunas medallas.","También practiqué <b>hockey subacuático</b>, sin llegar a competir.","Estudié en la <b>I.E. Caracas</b> desde preescolar."])],
+ ["eta2","🎻","10 A 15 AÑOS","Música",P(["Seguí mis estudios en la I.E. Caracas.","A los <b>13 años</b> entré a una red musical: toqué violín y luego viola.","También recibí formación en canto y asistí a varios conciertos."])],
+ ["eta3","🚀","15 A 20 AÑOS","Escritura, audiovisual y tecnología",P(["A los <b>16 años</b>, en grado once, mi texto fue seleccionado en un taller de escritura de la Alcaldía de Medellín.","Hice la <b>media técnica en Medios Audiovisuales</b> (convenio colegio–ITM), en la primera promoción. Para enfocarme dejé la red musical.","Me volví más extrovertida y descubrí que mi verdadero interés era la tecnología.","En el ITM me gradué como <b>Tecnóloga en Desarrollo de Software</b> y seguí con Ingeniería de Sistemas.","En el semillero (4.º a 7.º semestre) saqué adelante sola <b>Ruta Violeta</b>, que llegó hasta la Vicerrectoría, y luego apoyé el frontend de <b>Neurolab</b>.","Ruta Violeta es mi proyecto más significativo: ahí aprendí Power Apps y Power Automate."])],
+ ["motiva","🔥","LO QUE ME MOTIVA","Aprender y construir con propósito",P(["Aprender por iniciativa propia: además de mis clases me certifiqué en AWS y sigo profundizando. Y que lo que construyo tenga un propósito, como Ruta Violeta."])]]},
+{ico:"🎮",name:"Nivel 2 · Selección de personaje",items:[
+ ["clase","🎮","CLASE Y PODER ESPECIAL","Tecnóloga en Desarrollo de Software",P(["<b>Clase:</b> Tecnóloga en Desarrollo de Software, hoy ingeniera de sistemas en formación.","<b>Poder especial:</b> aprendo por iniciativa propia."])],
+ ["stat0","🧪","~2 AÑOS · DATAURBAN","Semillero de datos y low code",P(["Semillero de ciencia de datos y low code."])],
+ ["stat1","🛠️","2 PROYECTOS REALES","Ruta Violeta y Neurolab",P(["Ruta Violeta y Neurolab, ambos en el ITM."])],
+ ["stat2","☁️","AWS · CERTIFICACIÓN","Cloud Practitioner",P(["Cloud Practitioner, obtenida en octubre de 2026."])],
+ ["stat3","🎓","8.º SEMESTRE","Ingeniería de Sistemas en curso",P(["Tecnología graduada en 2025, ingeniería en curso."])],
+ ["habil","💪","HABILIDADES","Mis fortalezas",P(["Aprendizaje autónomo · Trabajo en equipo · Planificación · Rigor y disciplina."])]]},
+{ico:"🗺️",name:"Nivel 3 · El origen",items:[
+ ["or0","🎬","2022","Medios Audiovisuales",P(["Bachiller técnica en Medios Audiovisuales. De ahí viene mi gusto por comunicar de forma visual."])],
+ ["or1","💻","2025","Tecnóloga en Desarrollo de Software",P(["Tecnóloga en Desarrollo de Software en el ITM: aquí empecé a construir soluciones reales."])],
+ ["or2","🚀","HOY","Ingeniería de Sistemas",P(["Ingeniería de Sistemas en el ITM, y lista para mi práctica profesional."])]]},
+{ico:"🧩",name:"Nivel 4 · Misiones",items:[
+ ["ruta","🟣","RUTA VIOLETA · FEB 2024 – MAY 2026","Ruta Violeta",P(["<b>Reto:</b> un canal seguro para reportar acoso y violencia de género.","<b>Acción:</b> app responsive con Power Apps, listas en SharePoint y alertas con Power Automate.","<b>Resultado:</b> reportes con alertas automáticas y protocolo de la ruta de atención."])],
+ ["neuro","🧠","NEUROLAB · AGO 2025 – MAY 2026","Neurolab",P(["<b>Reto:</b> centralizar la gestión de pruebas psicológicas institucionales.","<b>Acción:</b> frontend con React, HTML y CSS, con vistas por rol, y trabajo en equipo con Git.","<b>Resultado:</b> interfaces distintas para estudiante, psicólogo y administrador."])]]},
+{ico:"🎒",name:"Nivel 5 · Inventario",items:[
+ ["inv0","⚙️","INVENTARIO","Power Automate",P(["Automatizó las alertas de Ruta Violeta. Es la base para la automatización de procesos."])],
+ ["inv1","🗂️","INVENTARIO","SharePoint",P(["Almacenar y consultar reportes: administración centralizada de información."])],
+ ["inv2","📱","INVENTARIO","Power Apps",P(["Interfaces conectadas a datos, con low code y en poco tiempo."])],
+ ["inv3","🐍","INVENTARIO","Python (académico)",P(["Lo he visto en la academia, junto con Java y SQL Server. Mi punto de partida para seguir automatizando."])],
+ ["inv4","📧","INVENTARIO","Office 365",P(["Mi entorno diario de trabajo en proyectos y semillero."])],
+ ["inv5","🔀","INVENTARIO","Git + React",P(["Trabajo en equipo con control de versiones y desarrollo de interfaces."])],
+ ["inv6","☁️","INVENTARIO","AWS Cloud",P(["Certificada en octubre de 2026: aprendo rápido y por mi cuenta."])],
+ ["inv7","📊","INVENTARIO","Power BI",P(["Tengo conocimientos de Power BI como herramienta para analizar y visualizar datos."])],
+ ["inv8","🤖","PRÓXIMA META","AWS AI Practitioner",P(["Próximamente: certificación AWS Certified AI Practitioner, enfocada en inteligencia artificial."])]]},
+{ico:"🎯",name:"Nivel 6 · ¿Qué puedo aportar?",items:[
+ ["req0","🐍","REQUISITO","Python y programación",P(["Lo he trabajado en la academia, con Java y SQL Server, y lo aplico en mis proyectos."])],
+ ["req1","⚙️","REQUISITO","Automatizar procesos",P(["Lo hice con Power Automate en Ruta Violeta."])],
+ ["req2","🤝","REQUISITO","Office y trabajo en equipo",P(["Office 365, SharePoint y Git en proyectos colaborativos."])],
+ ["req3","🏅","REQUISITO","Orientación al logro",P(["Cerré dos proyectos y obtuve la certificación de AWS por iniciativa propia."])]]}
+];
+const VISIT={1:["motiva"],2:["clase","habil"]};
+const bookSeen=new Set,markCard=(...ids)=>ids.forEach(k=>bookSeen.add(k));
+const BOOK_TOTAL=BOOK_SECS.reduce((a,s)=>a+s.items.length,0);
+const CONTACT=`Vanessa Espinosa · <a href="https://linkedin.com/in/vanessa-espinosa-cardona" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:vanesaespinosa2013@gmail.com">vanesaespinosa2013@gmail.com</a>`;
+/* mismo HTML para la bitácora (con marcas) y para el perfil impreso (completo, sin marcas) */
+function bookHTML(marks){return BOOK_SECS.map(s=>`<section class="book-sec"><h3>${s.ico} ${s.name.toUpperCase()}</h3>${s.items.map(([id,ico,tag,title,body])=>{const ok=marks&&bookSeen.has(id);
+return `<div class="book-item ${marks?(ok?"got":""):"all"}"><span class="bi-ico">${ico}</span><div class="bi-txt"><span class="bi-tag">${tag}</span><b class="bi-title">${title}</b><div class="bi-body">${body}</div></div>${marks?`<span class="bi-check" aria-label="${ok?"Descubierto":"Sin descubrir"}">${ok?"✓":"·"}</span>`:""}</div>`}).join("")}</section>`).join("")}
+function openBook(){if($("#bkm"))return;
+const coins=Object.values(got).reduce((a,s)=>a+s.size,0);
+const m=document.createElement("div");m.id="bkm";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.setAttribute("aria-labelledby","bktitle");
+m.innerHTML=`<div class="bk"><button class="fcx" id="bkx" aria-label="Cerrar">✕</button>
+<span class="fctag">CONTENIDO COMPLETO</span><h2 id="bktitle">BITÁCORA</h2>
+<p class="sub" style="font-size:13px;margin-bottom:6px">Todo lo que hay en el juego, para leer con calma. Lo que ya descubriste aparece marcado.</p>
+<p class="tiny">${bookSeen.size} de ${BOOK_TOTAL} contenidos descubiertos · ${xp} XP · ${coins}/${S.length*3} 🪙</p>
+${bookHTML(true)}
+<div class="bkfoot"><p class="tiny">${CONTACT}</p><button class="btn" id="bkc">CERRAR</button></div></div>`;
+document.body.appendChild(m);beep(660,.1);
+const close=()=>{m.remove();document.removeEventListener("keydown",esc)},esc=ev=>{if(ev.key==="Escape")close()};
+document.addEventListener("keydown",esc);
+$("#bkx",m).onclick=close;$("#bkc",m).onclick=close;m.addEventListener("pointerdown",ev=>{if(ev.target===m)close()});
+$("#bkx",m).focus()}
+function fillProfile(){$("#profile-book").innerHTML=bookHTML(false);$("#profile-contact").innerHTML=CONTACT}
+function openProfile(){fillProfile();const completion=$("#md");if(completion)completion.remove();$("#app").hidden=true;$("#profile-view").hidden=false}
+function closeProfile(){$("#profile-view").hidden=true;$("#app").hidden=false}
+function prepareProfileForPrint(){fillProfile();$$("#md,#bkm,#fcm,.toast,.pt").forEach(n=>n.remove());$("#app").hidden=true;$("#profile-view").hidden=false;document.body.classList.add("printing-profile")}
 /* pantallas */
 const S=[];
 S.push({h:`<h1 class="ttl"><span>JUGADORA </span></h1>
@@ -209,7 +373,7 @@ S.push({h:`<h1 class="ttl"><span>JUGADORA </span></h1>
 <div class="cards3">
 <button type="button" aria-label="Ver información del personaje: quién soy"><i>🧩</i><small>QUIÉN SOY</small><b>Curiosa y creativa</b></button>
 <button type="button" aria-label="Ver información del personaje: qué me gusta"><i>🎧</i><small>QUÉ ME GUSTA</small><b>Juegos · música · deporte</b></button>
-<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Crear soluciones que generen valor.</b></button></div>
+<button type="button" aria-label="Ver información del personaje: qué me motiva"><i>🔥</i><small>QUÉ ME MOTIVA</small><b>Crear solucionenes que generen valor</b></button></div>
 <p class="c"><button class="btn blink" id="go">▶ PRESS START</button></p>`,
 init(e){$("#go",e).onclick=()=>show(1);$$(".cards3 button",e).forEach(card=>card.onclick=openFicha);
 $("#hero",e).onclick=ev=>{anim($("#hero",e),"jump");beep(520,.1)}}});
@@ -222,9 +386,9 @@ S.push({h:`<h2>Nivel 1 · Datos personales · Mi historia</h2><p class="sub">Toc
 <button class="box mis eta"><span class="stamp">¡LISTO!</span><p><b>15 A 20 AÑOS</b><br><span class="sub">Escritura, audiovisual y tecnología</span></p>
 <div class="det"><p>• A los 16 años, en grado once, mi texto fue seleccionado en un taller de escritura de la Alcaldía de Medellín.</p><p>• Hice la media técnica en Medios Audiovisuales (convenio colegio–ITM), en la primera promoción. Para enfocarme dejé la red musical.</p><p>• Me volví más extrovertida y descubrí que mi verdadero interés era la tecnología.</p><p>• En el ITM me gradué como Tecnóloga en Desarrollo de Software y seguí con Ingeniería de Sistemas.</p><p>• En el semillero (4.º a 7.º semestre) saqué adelante sola Ruta Violeta, que llegó hasta la Vicerrectoría, y luego apoyé el frontend de Neurolab.</p><p>• Ruta Violeta es mi proyecto más significativo: ahí aprendí Power Apps y Power Automate.</p></div></button>
 <div class="box"><p><b>Lo que me motiva</b></p><p>Aprender por iniciativa propia: además de mis clases me certifiqué en AWS y sigo profundizando. Y que lo que construyo tenga un propósito, como Ruta Violeta.</p></div>`,
-init(e){$$(".eta",e).forEach(m=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(25)}}})}});
+init(e){$$(".eta",e).forEach((m,i)=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){markCard("eta"+(i+1));beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(25)}}})}});
 
-S.push({h:`<h2>Nivel 2 · Selección de personaje</h2>
+S.push({h:`<h2>Nivel 2 ·Selección de personaje</h2>
 <div class="box"><p><b>Clase:</b> Tecnóloga en Desarrollo de Software, hoy ingeniera de sistemas en formación.</p><p><b>Poder especial:</b> aprendo por iniciativa propia.</p></div>
 <p class="sub">Toca las tarjetas para descubrir más.</p>
 <div class="grid">
@@ -235,7 +399,7 @@ S.push({h:`<h2>Nivel 2 · Selección de personaje</h2>
 <div id="sk"></div>`,
 enter(e){const K=[["Aprendizaje autónomo",95],["Trabajo en equipo",88],["Planificación",85],["Rigor y disciplina",90]];
 $("#sk",e).innerHTML=K.map(([n])=>`<div class="skill">${n}<i><u></u></i></div>`).join("");setTimeout(()=>$$("u",e).forEach((u,i)=>u.style.width=K[i][1]+"%"),80)},
-init(e){$$(".stat",e).forEach(c=>c.onclick=()=>{const f=!c.dataset.s;c.dataset.s=1;$("span",c).textContent=c.dataset.d;anim(c,"pop");beep(660,.07);if(f)gain(20)})}});
+init(e){$$(".stat",e).forEach((c,i)=>c.onclick=()=>{markCard("stat"+i);const f=!c.dataset.s;c.dataset.s=1;$("span",c).textContent=c.dataset.d;anim(c,"pop");beep(660,.07);if(f)gain(20)})}});
 
 S.push({h:`<h2>Nivel 3 · El origen</h2>
 <p class="sub">Mueve a tu personaje por el mapa.</p>
@@ -243,7 +407,7 @@ S.push({h:`<h2>Nivel 3 · El origen</h2>
 <div class="nodes"><button><s></s>2022</button><button><s></s>2025</button><button><s></s>HOY</button></div></div>
 <div class="box y"><p id="ot" style="min-height:96px"></p></div>`,
 init(e){const T=["Bachiller técnica en Medios Audiovisuales. De ahí viene mi gusto por comunicar de forma visual.","Tecnóloga en Desarrollo de Software en el ITM: aquí empecé a construir soluciones reales.","Ingeniería de Sistemas en el ITM, y lista para mi práctica profesional."],L=["16.6%","50%","83.3%"],done=new Set;
-const go=i=>{$("#av",e).style.left=`calc(${L[i]} - 20px)`;$$(".nodes button",e).forEach((b,k)=>b.classList.toggle("on",k===i));tw($("#ot",e),T[i]);beep(400+i*150,.1);if(!done.has(i)){done.add(i);gain(15)}};
+const go=i=>{markCard("or"+i);$("#av",e).style.left=`calc(${L[i]} - 20px)`;$$(".nodes button",e).forEach((b,k)=>b.classList.toggle("on",k===i));tw($("#ot",e),T[i]);beep(400+i*150,.1);if(!done.has(i)){done.add(i);gain(15)}};
 $$(".nodes button",e).forEach((b,i)=>b.onclick=()=>go(i));e._go=go},
 enter(e){e._go(0)}});
 
@@ -252,26 +416,26 @@ S.push({h:`<h2>Nivel 4 · Misiones</h2><p class="sub">Toca una misión para abri
 <div class="det"><p><b>Reto:</b> un canal seguro para reportar acoso y violencia de género.</p><p><b>Acción:</b> app responsive con Power Apps, listas en SharePoint y alertas con Power Automate.</p><p><b>Resultado:</b> reportes con alertas automáticas y protocolo de la ruta de atención.</p></div></button>
 <button class="box mis"><span class="stamp">¡COMPLETA!</span><p><b>Neurolab</b><br><span class="sub">Ago 2025 – May 2026</span></p>
 <div class="det"><p><b>Reto:</b> centralizar la gestión de pruebas psicológicas institucionales.</p><p><b>Acción:</b> frontend con React, HTML y CSS, con vistas por rol, y trabajo en equipo con Git.</p><p><b>Resultado:</b> interfaces distintas para estudiante, psicólogo y administrador.</p></div></button>`,
-init(e){$$(".mis",e).forEach(m=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(40)}}})}});
+init(e){$$(".mis",e).forEach((m,i)=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){markCard(["ruta","neuro"][i]);beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(40)}}})}});
 
 const OBJ=[["Power Automate","Automatizó las alertas de Ruta Violeta. Es la base para la automatización de procesos."],["SharePoint","Almacenar y consultar reportes: administración centralizada de información."],["Power Apps","Interfaces conectadas a datos, con low code y en poco tiempo."],["Python (académico)","Lo he visto en la academia, junto con Java y SQL Server. Mi punto de partida para seguir automatizando."],["Office 365","Mi entorno diario de trabajo en proyectos y semillero."],["Git + React","Trabajo en equipo con control de versiones y desarrollo de interfaces."],["AWS Cloud","Certificada en octubre de 2026: aprendo rápido y por mi cuenta."],["Power BI","Tengo conocimientos de Power BI como herramienta para analizar y visualizar datos."],["🔒 AWS AI Practitioner","Próximamente: certificación AWS Certified AI Practitioner, enfocada en inteligencia artificial."]];
-S.push({h:`<h2>Nivel 5 · Capacidades</h2><p class="sub">Recoge los 8 conocimientos y desbloquea tu próxima meta.</p>
+S.push({h:`<h2>Nivel 5 ·Inventario</h2><p class="sub">Recoge los 8 conocimientos y desbloquea tu próxima meta.</p>
 <div class="slots" id="sl"></div><div class="items" id="it"></div>
 <div class="box y" style="min-height:96px"><p id="why" class="sub">Elige un objeto…</p></div>`,
 init(e){const got=new Set,sl=$("#sl",e),unlockIndex=OBJ.length-1,collectibleCount=unlockIndex;sl.innerHTML="<i></i>".repeat(collectibleCount);
 OBJ.forEach(([n,d],i)=>{const b=document.createElement("button");b.className="item"+(i===unlockIndex?" lock":"");b.textContent=n;
 b.onclick=ev=>{if(i===unlockIndex&&got.size<collectibleCount){anim(b,"pop");beep(150,.15);$("#why",e).textContent="Aún falta recoger "+(collectibleCount-got.size)+" objetos.";return}
-tw($("#why",e),d);anim(b,"pop");
+tw($("#why",e),d);anim(b,"pop");markCard("inv"+i);
 if(i===unlockIndex){b.classList.add("open");if(!b.dataset.x){b.dataset.x=1;gain(60);confetti();jingle()}return}
 beep(500+i*60,.09);burst(ev.clientX,ev.clientY,10);if(!got.has(i)){got.add(i);st.items=got.size;b.classList.add("got");sl.children[got.size-1].classList.add("f");gain(15);
 if(got.size===collectibleCount){$$(".item",e)[unlockIndex].textContent="🔓 AWS AI Practitioner · próxima";toast("¡Completo!");jingle()}}};
 $("#it",e).appendChild(b)})}});
 
 const REQ=[["Python y programación","Lo he trabajado en la academia, con Java y SQL Server, y lo aplico en mis proyectos."],["Automatizar procesos","Lo hice con Power Automate en Ruta Violeta."],["Office y trabajo en equipo","Office 365, SharePoint y Git en proyectos colaborativos."],["Orientación al logro","Cerré dos proyectos y obtuve la certificación de AWS por iniciativa propia."]];
-S.push({h:`<h2>Nivel 6 · ¿Qué puedo aportar?</h2><p class="sub">Toca cada requisito para validarlo. Al terminar, camina hasta el final del suelo y salta para coger el trofeo 🏆.</p><div id="rq"></div>
+S.push({h:`<h2>Nivel 6 ·¿Qué puedo aportar?</h2><p class="sub">Toca cada requisito para validarlo. Al terminar, camina hasta el final del suelo y salta para coger el trofeo 🏆.</p><div id="rq"></div>
 <p class="c"><button class="btn" id="win" disabled>▶ SÍ, CONTINUAR</button></p><div class="box" id="end" hidden></div>`,
-init(e){let n=0;REQ.forEach(([t,d])=>{const b=document.createElement("button");b.className="req";b.innerHTML=`<i>□</i><span>${t}<small>${d}</small></span>`;
-b.onclick=ev=>{if(b.classList.contains("ok"))return;b.classList.add("ok");$("i",b).textContent="✔";beep(700,.1);burst(ev.clientX,ev.clientY,10);gain(25);if(++n===4){$("#win",e).disabled=false;$("#win",e).classList.add("blink");jingle()}};$("#rq",e).appendChild(b)});
+init(e){let n=0;REQ.forEach(([t,d],qi)=>{const b=document.createElement("button");b.className="req";b.innerHTML=`<i>□</i><span>${t}<small>${d}</small></span>`;
+b.onclick=ev=>{if(b.classList.contains("ok"))return;b.classList.add("ok");markCard("req"+qi);$("i",b).textContent="✔";beep(700,.1);burst(ev.clientX,ev.clientY,10);gain(25);if(++n===4){$("#win",e).disabled=false;$("#win",e).classList.add("blink");jingle()}};$("#rq",e).appendChild(b)});
 e._fin=()=>{if($("#md"))return;const first=!e._d;e._d=1;const n=Object.values(got).reduce((a,s)=>a+s.size,0),TT=S.length*3,r=n>=TT?"de ORO: ¡juntaste todas las monedas!":n>=TT/2?"de PLATA: ¡muy buen recorrido!":"de BRONCE: ¡aún quedan monedas por descubrir!";
  const w=$("#win",e);w.hidden=true;if(first){confetti();jingle()}
  const m=document.createElement("div");m.id="md";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");m.setAttribute("aria-labelledby","mt");
@@ -291,7 +455,7 @@ function show(i){prev=cur;cur=Math.max(0,Math.min(S.length-1,i));
 S.forEach((s,k)=>{s.el.classList.remove("on");if(k===cur){s.el.style.setProperty("--d",cur>=prev?"30px":"-30px");void s.el.offsetWidth;s.el.classList.add("on")}});
 if(!seen.has(cur)){seen.add(cur)}if(S[cur].enter)S[cur].enter(S[cur].el);
 [...dots.children].forEach((d,k)=>d.className=k===cur?"on":seen.has(k)?"done":"");
-lvlUpd();$("#fill").style.width=cur/(S.length-1)*100+"%";
+lvlUpd();(VISIT[cur]||[]).forEach(k=>markCard(k));$("#fill").style.width=cur/(S.length-1)*100+"%";
 stage.scrollTop=0;if(cur!==prev)beep(330,.06);PL.onShow(cur>=prev?1:-1)}
 
 
@@ -318,7 +482,7 @@ const PL={x:8,y:0,vy:0,hold:0,face:1,target:null,lock:0,
   if(last&&!TG){const t=document.createElement("div");t.id="tr";t.innerHTML=TROPHY;t.style.left=(W-92)+"px";gr.appendChild(t)}
   $("#door").textContent=last?"":"🚪";$("#back").textContent=cur?"◀":""}};
 let t0=performance.now();
-requestAnimationFrame(function loop(t){const dt=Math.min(.05,(t-t0)/1000);t0=t;const P=PL,W=gr.clientWidth;let d=P.hold;
+requestAnimationFrame(function loop(t){if($("#app").hidden){t0=t;PL.hold=0;PL.target=null;requestAnimationFrame(loop);return}const dt=Math.min(.05,(t-t0)/1000);t0=t;const P=PL,W=gr.clientWidth;let d=P.hold;
  if(P.target!==null){const df=P.target-P.x;if(Math.abs(df)<5)P.target=null;else d=Math.sign(df)}
  if(d){P.x+=d*150*dt;P.face=d}
  if(P.y>0||P.vy>0){P.vy-=1300*dt;P.y+=P.vy*dt;if(P.y<=0){P.y=0;P.vy=0}}
@@ -343,6 +507,12 @@ function lvlUpd(){const s=((performance.now()-T0)/1000)|0;$("#lvl").textContent=
 $("#lvl").onclick=()=>{tmOn=!tmOn;lvlUpd()};setInterval(lvlUpd,1000);
 addEventListener("pointerdown",()=>idle=0);addEventListener("keydown",()=>idle=0);
 setInterval(()=>{if(PL.x!==lastX){lastX=PL.x;idle=0;return}if(++idle>=15&&cur<S.length-1&&!hinted[cur]&&!$(".say",gr)){hinted[cur]=1;say("Cuando termines aquí, camina ▶ hasta el final del suelo para pasar al siguiente nivel.")}},1000);
+$("#print-profile").onclick=()=>{prepareProfileForPrint();window.print()};
+$("#close-profile").onclick=closeProfile;
+$("#book-btn").onclick=openBook;
+$("#profile-print").onclick=openProfile;
+addEventListener("beforeprint",prepareProfileForPrint);
+addEventListener("afterprint",()=>document.body.classList.remove("printing-profile"));
 show(0);
 
 </script>
