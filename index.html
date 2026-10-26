@@ -224,7 +224,7 @@ S.push({h:`<h2>Nivel 1 · Datos personales · Mi historia</h2><p class="sub">Toc
 <div class="box"><p><b>Lo que me motiva</b></p><p>Aprender por iniciativa propia: además de mis clases me certifiqué en AWS y sigo profundizando. Y que lo que construyo tenga un propósito, como Ruta Violeta.</p></div>`,
 init(e){$$(".eta",e).forEach(m=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(25)}}})}});
 
-S.push({h:`<h2>Nivel 2 ·Selección de personaje</h2>
+S.push({h:`<h2>Nivel 2 · Selección de personaje</h2>
 <div class="box"><p><b>Clase:</b> Tecnóloga en Desarrollo de Software, hoy ingeniera de sistemas en formación.</p><p><b>Poder especial:</b> aprendo por iniciativa propia.</p></div>
 <p class="sub">Toca las tarjetas para descubrir más.</p>
 <div class="grid">
@@ -255,7 +255,7 @@ S.push({h:`<h2>Nivel 4 · Misiones</h2><p class="sub">Toca una misión para abri
 init(e){$$(".mis",e).forEach(m=>m.onclick=()=>{const o=m.classList.toggle("open");if(o){beep(880,.12);burst(...ctr(m),10);if(!m.dataset.x){m.dataset.x=1;gain(40)}}})}});
 
 const OBJ=[["Power Automate","Automatizó las alertas de Ruta Violeta. Es la base para la automatización de procesos."],["SharePoint","Almacenar y consultar reportes: administración centralizada de información."],["Power Apps","Interfaces conectadas a datos, con low code y en poco tiempo."],["Python (académico)","Lo he visto en la academia, junto con Java y SQL Server. Mi punto de partida para seguir automatizando."],["Office 365","Mi entorno diario de trabajo en proyectos y semillero."],["Git + React","Trabajo en equipo con control de versiones y desarrollo de interfaces."],["AWS Cloud","Certificada en octubre de 2026: aprendo rápido y por mi cuenta."],["Power BI","Tengo conocimientos de Power BI como herramienta para analizar y visualizar datos."],["🔒 AWS AI Practitioner","Próximamente: certificación AWS Certified AI Practitioner, enfocada en inteligencia artificial."]];
-S.push({h:`<h2>Nivel 5 ·Inventario</h2><p class="sub">Recoge los 8 conocimientos y desbloquea tu próxima meta.</p>
+S.push({h:`<h2>Nivel 5 · Capacidades</h2><p class="sub">Recoge los 8 conocimientos y desbloquea tu próxima meta.</p>
 <div class="slots" id="sl"></div><div class="items" id="it"></div>
 <div class="box y" style="min-height:96px"><p id="why" class="sub">Elige un objeto…</p></div>`,
 init(e){const got=new Set,sl=$("#sl",e),unlockIndex=OBJ.length-1,collectibleCount=unlockIndex;sl.innerHTML="<i></i>".repeat(collectibleCount);
@@ -268,7 +268,7 @@ if(got.size===collectibleCount){$$(".item",e)[unlockIndex].textContent="🔓 AWS
 $("#it",e).appendChild(b)})}});
 
 const REQ=[["Python y programación","Lo he trabajado en la academia, con Java y SQL Server, y lo aplico en mis proyectos."],["Automatizar procesos","Lo hice con Power Automate en Ruta Violeta."],["Office y trabajo en equipo","Office 365, SharePoint y Git en proyectos colaborativos."],["Orientación al logro","Cerré dos proyectos y obtuve la certificación de AWS por iniciativa propia."]];
-S.push({h:`<h2>Nivel 6 ·¿Qué puedo aportar?</h2><p class="sub">Toca cada requisito para validarlo. Al terminar, camina hasta el final del suelo y salta para coger el trofeo 🏆.</p><div id="rq"></div>
+S.push({h:`<h2>Nivel 6 · ¿Qué puedo aportar?</h2><p class="sub">Toca cada requisito para validarlo. Al terminar, camina hasta el final del suelo y salta para coger el trofeo 🏆.</p><div id="rq"></div>
 <p class="c"><button class="btn" id="win" disabled>▶ SÍ, CONTINUAR</button></p><div class="box" id="end" hidden></div>`,
 init(e){let n=0;REQ.forEach(([t,d])=>{const b=document.createElement("button");b.className="req";b.innerHTML=`<i>□</i><span>${t}<small>${d}</small></span>`;
 b.onclick=ev=>{if(b.classList.contains("ok"))return;b.classList.add("ok");$("i",b).textContent="✔";beep(700,.1);burst(ev.clientX,ev.clientY,10);gain(25);if(++n===4){$("#win",e).disabled=false;$("#win",e).classList.add("blink");jingle()}};$("#rq",e).appendChild(b)});
